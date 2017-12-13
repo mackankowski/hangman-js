@@ -23,8 +23,11 @@ class View {
                     case 'main':
                         document.getElementById(ref.dest).innerHTML = this.responseText;
                         break;
+                    case 'categories':
+                        ref.loadCategories(ref, this.responseText);
+                        break;
                     case 'scoreboard':
-                        ref.loadScoreboard(ref, this.responseText);
+                        //ref.loadScoreboard(ref, this.responseText);
                         break;
                     default:
                         document.getElementById(ref.dest).innerHTML = "Content not found!";
@@ -37,12 +40,23 @@ class View {
 
     }
 
-    loadScoreboard(ref, response) {
+    loadCategories(ref, response) {
+
+        var categories = [];
 
         document.getElementById(ref.dest).innerHTML = response;
-        document.getElementById(ref.dest).innerHTML += "<p>Put scoreboard table here</p>";
 
+        for (let i in data.words) {
+            categories.push(data.words[i].category);            
+        }
+
+        categories = categories.filter((v, i, a) => a.indexOf(v) === i); 
+
+        for (let i in categories) {
+            document.getElementById(ref.dest).innerHTML += "<button class='categories'>" + categories[i] + "</button>";
+        }
     }
+
 
     backButtonDisplay() {
 
@@ -54,7 +68,7 @@ class View {
 
     }
 
-    refreshView(id){
+    refreshView(id) {
         
         this.id = id;
         this.loadTemplate();
