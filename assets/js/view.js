@@ -23,16 +23,16 @@ class View {
 
                 switch (ref.id) {
                     case 'main':
-                        ref.window = new Main(ref, this.responseText);
+                        ref.active = new Main(ref, this.responseText);
                         break;
                     case 'game':
-                        ref.window = new Game(ref, this.responseText);
+                        ref.active = new Game(ref, this.responseText);
                         break;
                     case 'categories':
-                        ref.window = new Categories(ref, this.responseText);
+                        ref.active = new Categories(ref, this.responseText);
                         break;
                     case 'scoreboard':
-                        ref.window = new Scoreboard(ref, this.responseText);
+                        ref.active = new Scoreboard(ref, this.responseText);
                         break;
                     default:
                         document.querySelector(this.content).innerHTML = "<p>Content not found!</p>";
@@ -50,9 +50,9 @@ class View {
     toogleReturnBtn() {
 
         if (this.id == 'main') {
-            document.getElementById("returnBtn").style.display = 'none';
+            document.querySelector(".main").style.display = 'none';
         } else {
-            document.getElementById("returnBtn").style.display = 'inline-block';
+            document.querySelector(".main").style.display = 'inline-block';
         }
 
     }

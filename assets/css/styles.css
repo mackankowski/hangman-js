@@ -91,9 +91,13 @@ button.scoreboard, button.score {
 
 button.category, button.score {
     
-        padding: 10px;
-    
-    }
+    padding: 10px;
+
+}
+
+button.hint {
+    padding: 10px;
+}
 
 /* <- section */
 
