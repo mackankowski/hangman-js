@@ -2,7 +2,8 @@ class Game {
 
     constructor(ref, response) {
         
-        this.tries = data.tries;        
+        this.word;
+        this.tries = data.tries;      
         this.randomizeWord();
         this.render(ref, response);
         
@@ -14,13 +15,16 @@ class Game {
         document.querySelector(ref.content).innerHTML += '<p>Category: ' + this.word.category + '</p>'; 
         document.querySelector(ref.content).innerHTML += '<p class="tries">Tries: ' + this.tries + '</p>'; 
         
-
     }
 
     randomizeWord() {
 
         this.word = data.words[Math.floor(Math.random() * data.words.length)];
 
+    }
+
+    showHint() {
+        document.querySelector(".hint").innerHTML = "<p>Hint: " + this.word.hint + "</p>";
     }
 
 }
