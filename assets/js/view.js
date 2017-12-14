@@ -34,8 +34,10 @@ class View {
                     case 'scoreboard':
                         ref.active = new Scoreboard(ref, this.responseText);
                         break;
+                    case 'summary':
+                        ref.active = new Summary(ref, this.responseText);
                     default:
-                        document.querySelector(this.content).innerHTML = "<p>Content not found!</p>";
+                        document.querySelector(this.section).innerHTML = "<p>Content not found!</p>";
                 }
 
                 
@@ -57,7 +59,7 @@ class View {
 
     }
 
-    refreshView(id) {
+    refresh(id) {
 
         this.id = id;
         this.loadTemplate();
