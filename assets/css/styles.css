@@ -118,6 +118,10 @@ button.category, button.score {
     
 }
 
+input {
+    text-transform: uppercase;
+}
+
 /* <- game */
 
 .hide {

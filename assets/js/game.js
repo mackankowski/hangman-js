@@ -3,7 +3,8 @@ class Game {
     constructor(ref, response) {
         
         this.word;
-        this.tries = data.tries;      
+        this.tries = data.tries;
+        this.usedLetters;      
         this.randomizeWord();
         this.render(ref, response);
         this.drawGuessArea();
@@ -13,10 +14,30 @@ class Game {
     render(ref, response) {
 
         document.querySelector(ref.section).innerHTML = response;
-        document.querySelector(".category").innerHTML += 'Category: ' + this.word.category; 
-        document.querySelector(".tries").innerHTML += 'Tries: ' + this.tries ; 
+        document.querySelector(".category").innerHTML = 'Category: ' + this.word.category; 
+        this.triesRefresh();
+        
+    }
+
+    triesRefresh() {
+
+        if (this.tries < 0) {
+            this.isGameOver();
+        } else {
+            document.querySelector(".tries").innerHTML = 'Tries: ' + this.tries ; 
+            
+        }
+
         
         
+    }
+
+    isGameOver() {
+
+        alert('Game Over!');
+        view.refresh('summary');
+        
+
     }
 
     randomizeWord() {
@@ -35,13 +56,44 @@ class Game {
 
             } else {
 
-                document.querySelector(".guessArea").innerHTML += "<input type='text' name='" + i + "'>";
+                document.querySelector(".guessArea").innerHTML += "<input type='text' name='" + (i+1) + "' onkeyup='view.active.validate(this, "+ i+ ")' maxlength='1'>";
 
             }
 
         }
 
     }
+
+    validate(ref, i) {
+
+        this.triesRefresh();
+
+        ref.value = ref.value.toUpperCase();
+
+        if (this.word.title[i].toUpperCase() == ref.value) {
+            ref.disabled = true;
+
+        } else {
+            ref.value = '';
+            this.tries--;
+            this.triesRefresh();
+        }
+        
+    }
+
+    isAvailable() {   
+
+    }
+
+
+    
+
+    isLetter() {
+
+    }
+
+
+
 
     showHint() {
         document.querySelector(".hint").style.display = 'inline-block';
