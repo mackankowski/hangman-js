@@ -16,17 +16,16 @@ h1 {
 }
 
 h2 {
-    font-size: 20px;
     font-weight: normal;
     margin: 1.5em;
     width: 100%;
-
 }
 
 .author {
     margin-bottom: 2em;
     color: #95a5a6;
 }
+
 
 /* <- header */
 
@@ -51,8 +50,11 @@ button, li {
     cursor: pointer;
     border-radius: 4px;
     padding: 20px;
-    width: 25%;
     transition: .5s;
+}
+
+.main > button {
+    width: 50vw;
 }
 
 button:hover {
@@ -95,11 +97,36 @@ button.category, button.score {
 
 }
 
-button.hint {
-    padding: 10px;
+.hintBtn {
+    padding: 5px;
+    margin: 0;
+    font-size: 1em;
 }
 
 /* <- section */
+
+/* game -> */
+
+.guessArea > input {
+
+    width: 5vh;
+    height: 5vh;
+    font-size: 5vh;
+    margin: 1vh;
+    padding: 1vh;
+    text-align: center;
+    
+}
+
+/* <- game */
+
+.hide {
+    display: none;
+}
+
+form {
+    margin-top: 3em;
+}
 
 /* transitions -> */
 
