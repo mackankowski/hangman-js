@@ -3,6 +3,13 @@ body {
     background-color: #ecf0f1;
     text-align: center;
     color: #6C7A89;
+    width: 100%;
+    margin: 0 auto;
+}
+
+p {
+    padding: 0;
+    margin: 0.5em 0;
 }
 
 /* header -> */
@@ -31,7 +38,7 @@ h2 {
 
 /* section -> */
 
-section, .content {
+section, .content, .fullPassArea{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,61 +83,103 @@ button.main:before {
     margin-right: .5em;
 }
 
-button.game {
+button.game, button.hintBtn, button.hint {
     background: #1abc9c;
 }
-
 
 button.categories, button.category {
     background: #3498db;
 }
 
-
-
-button.scoreboard, button.score {
+button.scoreboard, button.score, button.tries {
     background: #f1c40f;
 }
 
-button.category, button.score {
+button.category, button.score, button.hintBtn, button.tries, button.hint {
     
     padding: 10px;
 
 }
 
-.hintBtn {
-    padding: 5px;
-    margin: 0;
-    font-size: 1em;
+button.submit {
+    background: #9b59b6;
+    margin-bottom: 1em;
 }
 
 /* <- section */
 
 /* game -> */
 
-.guessArea > input {
+.alphabet {
+    display: block;
+    padding-top: 1em;
+}
 
-    width: 5vh;
-    height: 5vh;
-    font-size: 5vh;
-    margin: 1vh;
-    padding: 1vh;
+.alphabet > button {
+    display: inline-block;
+    width: 70px;
     text-align: center;
+    background: #6C7A89;
+}
+
+.alphabet > button:disabled {
+    background: #dde3e6;
+}
+
+.guessArea {
+    background: #6C7A89;
+    width: 100%;
+    padding: 1em 0;
+}
+
+.guessArea button {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    background: #ecf0f1;
+}
+
+form input {
+
+    font-size: 2em;
+    margin: 1vw;
+    padding: 1vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: #6C7A89;
     
 }
 
-input {
+form input.fullPass {
+    width: 90%;
+    font-size: 2em;
+    margin: 1vw;
+    padding: 1vw;
+    text-align: center;
     text-transform: uppercase;
+    color: #6C7A89;
 }
 
-/* <- game */
+form input.uknownLetter {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+
+}
+
+
 
 .hide {
     display: none;
 }
 
 form {
-    margin-top: 3em;
+    margin-top: 1em;
 }
+
+/* <- game */
+
+
 
 /* transitions -> */
 

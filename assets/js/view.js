@@ -36,8 +36,9 @@ class View {
                         break;
                     case 'summary':
                         ref.active = new Summary(ref, this.responseText);
+                        break;
                     default:
-                        document.querySelector(this.section).innerHTML = "<p>Content not found!</p>";
+                        document.querySelector(ref.section).innerHTML = "<p>Content not found!</p>";
                 }
 
                 
