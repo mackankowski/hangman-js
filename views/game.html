@@ -1,1 +1,14 @@
-<h2>Game</h2>
+<button class="category"></button>
+<button class="tries"></button>
+<button class="hint hide"></button>
+
+
+<button class="hintBtn" onclick="view.active.showHint()">Show hint</button>
+<form>
+        <div class="guessArea"></div>
+        <div class="alphabet"></div>        
+        <div class="fullPassArea">
+                <input class="fullPass" type="text">
+                <button type="button" class="submit" onclick="view.active.submitPassword(this)">Submit full password!</button>
+        </div>
+</form>
