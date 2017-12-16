@@ -22,7 +22,7 @@ class Summary {
 			if (confirm("You've entered: " + userName + ". Confirm?") == true) {
 				var data = {
 					name: userName,
-					score: window.min + '.' + window.sec
+					score: window.sec
 				};
 				var userArr = [];
 				if (localStorage.getItem('scoreboard') === null) {

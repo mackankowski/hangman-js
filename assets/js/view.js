@@ -27,7 +27,7 @@ class View {
 						ref.active = new Game(ref, this.responseText);
 						window.min = 0;
 						window.time = 0;
-						ref.time = setInterval(ref.timer, 100);
+						ref.time = setInterval(ref.timer, 1000);
 						break;
 					case 'categories':
 						ref.active = new Categories(ref, this.responseText);
@@ -48,12 +48,9 @@ class View {
 	}
 	timer() {
 		this.time++;
-		this.sec = Math.floor(window.time / 10);
-		if (this.sec == 60) {
-			this.min++;
-			this.time = 0;
-		}
-		document.querySelector(".timer").innerHTML = this.min + ' min ' + this.sec + ' sec';
+		window.min = Math.floor(window.time / 60);
+		window.sec = window.time - window.min * 60;
+		document.querySelector(".timer").innerHTML = window.min + ' min ' + window.sec + ' sec';
 	}
 	toogleReturnBtn() {
 		if (this.id == 'main') {

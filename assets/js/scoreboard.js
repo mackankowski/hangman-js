@@ -6,11 +6,11 @@ class Scoreboard {
 		document.querySelector(ref.section).innerHTML = response;
 		var obj = null ? null : JSON.parse(localStorage.getItem('scoreboard'));
 		if (obj) {
+			obj.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));
 			for (let i in obj) {
-				obj.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));
+				var min = Math.floor(obj[i].score / 60);
+				var sec = obj[i].score - min * 60;
 				if (i == 10) break;
-				var min = obj[i].score.split(".")[0];
-				var sec = obj[i].score.split(".")[1];
 				document.querySelector("ol").innerHTML += "<li class='score'>" + obj[i].name + ' (' + min + ' min ' + sec + ' sec)</li>';
 			}
 		} else {
