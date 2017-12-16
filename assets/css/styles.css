@@ -1,0 +1,365 @@
+/*
+
+Name: The Hangman
+Author: Maciej Kankowski
+URI: http://www.mackan.pl/
+Version: 1.0
+
+Table of content:
+
+1. Base
+    1.1. Buttons
+2. Layout
+    2.1. Header
+    2.2. Section
+    2.3. Footer
+3. Pages
+    3.1. Main
+    3.2. Game
+    3.3. Categories
+    3.4. Scoreboard
+    3.5. Summary
+4. Animations
+5. Modal
+
+*/
+
+
+/* 1. Base */
+
+body {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: #ecf0f1;
+    text-align: center;
+    color: #6C7A89;
+    width: 100%;
+    margin: 0 auto;
+}
+
+p {
+    padding: 0;
+    margin: 0.5em 0;
+}
+
+h1 {
+    letter-spacing: 2px;
+    margin: 0;
+    margin-top: 1em;
+    font-size: 2em;
+}
+
+h2 {
+    width: 100%;
+}
+
+header,
+section>div,
+section .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+
+/* 1.1. Buttons */
+
+button {
+    background: #bdc3c7;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 22px;
+    margin: .5em;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 20px;
+    transition: .5s;
+}
+
+button:hover {
+    transition: .5s;
+    opacity: .75;
+}
+
+button.game,
+button.hintBtn,
+button.hint {
+    background: #1abc9c;
+}
+
+button.categories,
+button.category,
+button.categoryRand {
+    background: #3498db;
+}
+
+button.scoreboard,
+button.score,
+button.tries {
+    background: #f1c40f;
+}
+
+#game button,
+button.main {
+    padding: .5em;
+    font-size: .75em;
+}
+
+#main button {
+    width: 100%;
+    border-radius: 0px;
+}
+
+button.submit,
+button.save {
+    background: #9b59b6;
+    margin-bottom: 1em;
+}
+
+button.tries:before {
+    content: 'Tries: ';
+}
+
+button.categoryRand:before {
+    content: 'Category: ';
+}
+
+
+/* 2. Layout */
+
+
+/*  2.1. Header */
+
+header .author {
+    margin-bottom: 2em;
+    color: #95a5a6;
+}
+
+header .github {
+    text-decoration: none;
+    color: white;
+    background: #24292e;
+    padding: .25em;
+    border-radius: 4px;
+    font-size: .75em;
+}
+
+header button.main {
+    background: #dde3e6;
+    color: #95a5a6;
+    margin-bottom: 2em;
+}
+
+header button.main:before {
+    content: '\00ab';
+    margin-right: .5em;
+}
+
+
+/*  2.2. Section */
+
+
+/*  2.3. Footer */
+
+
+/* 3. Pages */
+
+
+/* 3.1. Main */
+
+
+/* 3.2. Game */
+
+#game .legend>button {
+    display: inline-block;
+}
+
+#game .alphabet {
+    display: block;
+    padding: 1em 0;
+}
+
+#game .alphabet>button {
+    display: inline-block;
+    text-align: center;
+    background: #6C7A89;
+    width: 3em;
+    margin: .25em;
+}
+
+#game .alphabet>button:disabled {
+    background: #dde3e6;
+}
+
+#game .guessArea {
+    background: #6C7A89;
+    margin-top: 1em;
+    padding: 1em 0;
+    width: 100%;
+}
+
+#game input {
+    font-size: 2em;
+    padding: 1vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: #6C7A89;
+}
+
+#game input.fullPass {
+    width: 99%;
+    font-size: 1em;
+    padding: 0.25em 0;
+    margin-bottom: .5em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #6C7A89;
+}
+
+#game input.uknownLetter {
+    font-size: 1.25em;
+    width: 1.25em;
+    margin: .25em;
+    border-radius: 4px;
+    padding: 0;
+    pointer-events: none;
+}
+
+
+/* 3.3. Categories */
+
+#categories .content {
+    flex-direction: row;
+}
+
+
+/* 3.4. Scoreboard */
+
+#scoreboard ol {
+    margin: 0;
+    padding: 0;
+}
+
+#scoreboard ol li {
+    list-style-position: inside;
+    background: #95a5a6;
+    width: 100%;
+    margin-bottom: .5em;
+    padding: .5em 0;
+    color: white;
+}
+
+
+/* 3.5. Summary */
+
+#summary input {
+    text-transform: none;
+    margin: .5em;
+    padding: .5em;
+    font-size: 1.5em;
+    text-align: center;
+    color: #6C7A89;
+}
+
+#summary button.game {
+    width: 100%;
+    border-radius: 0;
+}
+
+
+/* 4. Animations */
+
+section>div {
+    -webkit-animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    -ms-animation: fadein 2s;
+    -o-animation: fadein 2s;
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* 5. Modal */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
