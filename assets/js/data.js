@@ -1,6 +1,7 @@
 var data = {
   tries: 10,
-  words: [{
+  words: [
+    {
       category: 'Books',
       title: 'Shining',
       hint: 'Redrum, redrum!'
