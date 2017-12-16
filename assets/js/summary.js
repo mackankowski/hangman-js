@@ -2,6 +2,7 @@ class Summary {
 	constructor(ref, response, win) {
 		this.win = win;
 		this.render(ref, response);
+		this.pressEnter();
 	}
 	render(ref, response) {
 		document.querySelector(ref.section).innerHTML = response;
@@ -22,7 +23,7 @@ class Summary {
 			if (confirm("You've entered: " + userName + ". Confirm?") == true) {
 				var data = {
 					name: userName,
-					score: window.min + '.' + window.sec
+					score: window.sec
 				};
 				var userArr = [];
 				if (localStorage.getItem('scoreboard') === null) {
@@ -61,5 +62,10 @@ class Summary {
 			view.refresh("game")
 		};
 
+	}
+	pressEnter() {
+		document.querySelector(".userName").addEventListener("keyup", function (e) {
+			if (e.keyCode === 13) document.querySelector(".save").click();
+		});
 	}
 }
