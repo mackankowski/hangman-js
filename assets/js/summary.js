@@ -1,10 +1,17 @@
 class Summary {
-	constructor(ref, response) {
+	constructor(ref, response, win) {
+		this.win = win;
 		this.render(ref, response);
 	}
 	render(ref, response) {
 		document.querySelector(ref.section).innerHTML = response;
-		document.querySelector(".timer").innerHTML = window.min + ' min ' + window.sec + ' sec';
+		if (this.win) {
+			document.querySelector("h2").innerHTML = "Winner! Your time is:";
+			document.querySelector(".timer").innerHTML = window.min + ' min ' + window.sec + ' sec';
+		} else {
+			document.querySelector(".content").style.display = 'none';
+			document.querySelector("h2").innerHTML = "You lose!";
+		}
 	}
 	save() {
 		let userName = document.querySelector(".userName").value;
@@ -12,7 +19,10 @@ class Summary {
 			alert("Provide user name!");
 		} else {
 			if (confirm("You've entered: " + userName + ". Confirm?") == true) {
-				var data = { name: userName, score: window.min + '.' + window.sec };
+				var data = {
+					name: userName,
+					score: window.min + '.' + window.sec
+				};
 				var userArr = [];
 				if (localStorage.getItem('scoreboard') === null) {
 					userArr.push(data);
