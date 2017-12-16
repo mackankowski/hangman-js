@@ -98,8 +98,8 @@ class Game {
 		if (password == '') {
 			alert("Provide the password!");
 		} else {
-			this.fillGaps();
 			if (password.toUpperCase() == this.word.title) {
+				this.fillGaps();
 				this.isGameOver(true);
 			} else {
 				this.isGameOver(false);
@@ -120,20 +120,19 @@ class Game {
 		}
 	}
 	pressEnter() {
-		document.querySelector(".fullPass").addEventListener("keyup", function(e) {
+		document.querySelector(".fullPass").addEventListener("keyup", function (e) {
 			if (e.keyCode === 13) document.querySelector(".submit").click();
 		});
 	}
 	async isGameOver(win) {
 		clearInterval(view.time);
+		view.win = win;
 		if (win) {
-			alert('You win! Time: ' + window.min + ' min ' + window.sec + ' sec');
 			await this.sleep(1000);
 			view.refresh('summary');
+
 		} else {
-			alert('You lose!');
-			await this.sleep(1000);
-			view.refresh('main');
+			view.refresh('summary');
 		}
 	}
 	sleep(ms) {

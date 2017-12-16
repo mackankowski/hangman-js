@@ -53,8 +53,7 @@ h2 {
 
 header,
 section>div,
-#game .fullPassArea,
-#scoreboard .content {
+section .content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,7 +236,7 @@ header button.main:before {
 /* 3.3. Categories */
 
 #categories .content {
-    display: inline-flex;
+    flex-direction: row;
 }
 
 
@@ -262,7 +261,16 @@ header button.main:before {
 
 #summary input {
     text-transform: none;
-    margin: 0.5em;
+    margin: .5em;
+    padding: .5em;
+    font-size: 1.5em;
+    text-align: center;
+    color: #6C7A89;
+}
+
+#summary button.game {
+    width: 100%;
+    border-radius: 0;
 }
 
 
