@@ -9,6 +9,7 @@ class View {
 		window.sec = 0;
 		this.loadTemplate();
 	}
+
 	loadTemplate() {
 		this.ajaxRequest(this);
 		this.toogleReturnBtn();

@@ -12,6 +12,7 @@ class Summary {
 			document.querySelector(".content").style.display = 'none';
 			document.querySelector("h2").innerHTML = "You lose!";
 		}
+		this.buttonEvents(ref);
 	}
 	save() {
 		let userName = document.querySelector(".userName").value;
@@ -49,5 +50,16 @@ class Summary {
 			}
 		}
 		return -1;
+	}
+	buttonEvents(ref) {
+		var saveBtn = document.querySelector(".save");
+		saveBtn.onclick = function () {
+			view.active.save();
+		};
+		var gameBtn = document.querySelector(".game");
+		gameBtn.onclick = function () {
+			view.refresh("game")
+		};
+
 	}
 }

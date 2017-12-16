@@ -7,6 +7,7 @@ class Game {
 		this.randomizeWord();
 		this.render(ref, response);
 		this.drawGuessArea();
+		this.buttonEvents();
 		this.pressEnter();
 	}
 	render(ref, response) {
@@ -22,7 +23,7 @@ class Game {
 	}
 	renderAlphabet() {
 		for (var i = 0; i < this.alphabet.length; i++) {
-			document.querySelector(".alphabet").innerHTML += "<button name='" + this.alphabet[i] + "' type='button' class='alphabetLetter' onclick='view.active.validate(this)'>" + this.alphabet[i] + "</button>";
+			document.querySelector(".alphabet").innerHTML += "<button name='" + this.alphabet[i] + "' type='button' class='alphabetLetter'>" + this.alphabet[i] + "</button>";
 		}
 	}
 	triesRefresh() {
@@ -73,10 +74,14 @@ class Game {
 			ref.disabled = true;
 		}
 	}
-	isCorrect(correct) {
+	async isCorrect(correct) {
 		if (correct) {
+			// EDIT
 			alert("Success! You've guessed the letter.");
+			await this.sleep(1000);
+
 		} else {
+			// EDIT
 			alert("Ups... You've missed. Try again!");
 		}
 	}
@@ -119,11 +124,6 @@ class Game {
 			}
 		}
 	}
-	pressEnter() {
-		document.querySelector(".fullPass").addEventListener("keyup", function (e) {
-			if (e.keyCode === 13) document.querySelector(".submit").click();
-		});
-	}
 	async isGameOver(win) {
 		clearInterval(view.time);
 		view.win = win;
@@ -137,5 +137,26 @@ class Game {
 	}
 	sleep(ms) {
 		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	buttonEvents() {
+		var hintBtn = document.querySelector(".hintBtn");
+		hintBtn.onclick = function () {
+			view.active.showHint();
+		};
+		var submitBtn = document.querySelector(".submit");
+		submitBtn.onclick = function () {
+			view.active.submitPassword();
+		};
+		var alphabetLetterBtn = document.querySelectorAll(".alphabetLetter");
+		for (var i = 0; i < alphabetLetterBtn.length; i++) {
+			alphabetLetterBtn[i].onclick = function () {
+				view.active.validate(this);
+			};
+		}
+	}
+	pressEnter() {
+		document.querySelector(".fullPass").addEventListener("keyup", function (e) {
+			if (e.keyCode === 13) document.querySelector(".submit").click();
+		});
 	}
 }
