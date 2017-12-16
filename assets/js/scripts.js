@@ -1,5 +1,3 @@
-(function(){
-    
-    this.view = new View('main');
-
+(function() {
+	this.view = new View('main');
 })();
