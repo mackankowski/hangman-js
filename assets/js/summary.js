@@ -12,10 +12,7 @@ class Summary {
 			alert("Provide user name!");
 		} else {
 			if (confirm("You've entered: " + userName + ". Confirm?") == true) {
-				var data = {
-					name: userName,
-					score: window.min + ' min ' + window.sec + ' sec'
-				};
+				var data = { name: userName, score: window.min + '.' + window.sec };
 				var userArr = [];
 				if (localStorage.getItem('scoreboard') === null) {
 					userArr.push(data);
@@ -24,12 +21,12 @@ class Summary {
 					var idx = this.userExists(userArr, userName);
 					if (idx >= 0) {
 						userArr[idx] = data;
-						alert("Your score's been updated!");
+						alert("User name exists! New score will be overwritten.");
 					} else {
 						userArr.push(data);
-						alert("Your score's been saved!");
 					}
 				}
+				alert("Your score's been saved!");
 				localStorage.setItem('scoreboard', JSON.stringify(userArr));
 				view.refresh('main');
 			}
