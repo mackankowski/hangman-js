@@ -4,7 +4,7 @@ World famous guessing game in digital edition
 
 ## technology
 
-Build in plain/clean:
+Build in pure/plain/raw:
 
 * html
 * css
