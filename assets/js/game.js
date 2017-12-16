@@ -74,14 +74,10 @@ class Game {
 			ref.disabled = true;
 		}
 	}
-	async isCorrect(correct) {
+	isCorrect(correct) {
 		if (correct) {
-			// EDIT
 			alert("Success! You've guessed the letter.");
-			await this.sleep(1000);
-
 		} else {
-			// EDIT
 			alert("Ups... You've missed. Try again!");
 		}
 	}
