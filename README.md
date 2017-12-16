@@ -12,7 +12,7 @@ Build in pure:
 
 NO libraries, NO frameworks!
 
-# features
+## features
 
 - [x] Custom template engine in vanilla JS
 - [x] Passwords database in file: [data.js](https://github.com/mackankowski/hangman/blob/master/assets/data.js)
