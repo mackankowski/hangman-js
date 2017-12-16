@@ -3,18 +3,20 @@ class View {
 		this.id = id;
 		this.section = "section";
 		this.content = ".content";
-		this.loadTemplate();
 		this.time = 0;
+		this.win = false;
 		window.min = 0;
 		window.sec = 0;
+		this.loadTemplate();
 	}
+
 	loadTemplate() {
 		this.ajaxRequest(this);
 		this.toogleReturnBtn();
 	}
 	ajaxRequest(ref) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
+		xhttp.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
 				clearInterval(ref.time);
 				switch (ref.id) {
@@ -34,7 +36,7 @@ class View {
 						ref.active = new Scoreboard(ref, this.responseText);
 						break;
 					case 'summary':
-						ref.active = new Summary(ref, this.responseText);
+						ref.active = new Summary(ref, this.responseText, ref.win);
 						break;
 					default:
 						document.querySelector(ref.section).innerHTML = "<p>Content not found!</p>";
