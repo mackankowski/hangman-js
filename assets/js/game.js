@@ -26,10 +26,9 @@ class Game {
 		});
 	}
 	triesRefresh() {
+		document.querySelector(".tries").innerHTML = this.tries;
 		if (this.tries == 0) {
 			this.isGameOver(false);
-		} else {
-			document.querySelector(".tries").innerHTML = this.tries;
 		}
 	}
 	randomizeWord() {
