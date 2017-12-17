@@ -2,7 +2,7 @@
 
 Name: The Hangman
 Author: Maciej Kankowski
-URI: http://www.mackan.pl/
+URI: http://mackan.pl/hangman
 Version: 1.0
 
 Table of content:
@@ -20,7 +20,6 @@ Table of content:
     3.4. Scoreboard
     3.5. Summary
 4. Animations
-5. Modal
 
 */
 
@@ -90,14 +89,14 @@ button:hover {
 }
 
 button.game,
-button.hintBtn,
+button.hint-btn,
 button.hint {
     background: #1abc9c;
 }
 
 button.categories,
 button.category,
-button.categoryRand {
+button.category-rand {
     background: #3498db;
 }
 
@@ -128,7 +127,7 @@ button.tries:before {
     content: 'Tries: ';
 }
 
-button.categoryRand:before {
+button.category-rand:before {
     content: 'Category: ';
 }
 
@@ -199,7 +198,7 @@ header button.main:before {
     background: #dde3e6;
 }
 
-#game .guessArea {
+#game .guess-area {
     background: #6C7A89;
     margin-top: 1em;
     padding: 1em 0;
@@ -214,7 +213,7 @@ header button.main:before {
     color: #6C7A89;
 }
 
-#game input.fullPass {
+#game input.full-pass-input {
     width: 99%;
     font-size: 1em;
     padding: 0.25em 0;
@@ -224,7 +223,7 @@ header button.main:before {
     color: #6C7A89;
 }
 
-#game input.uknownLetter {
+#game input.guess-letter-input {
     font-size: 1.25em;
     width: 1.25em;
     margin: .25em;
@@ -233,11 +232,40 @@ header button.main:before {
     pointer-events: none;
 }
 
+#game .success-highlight-in {
+    background: #2ecc71;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+
+#game .failure-highlight-in {
+    background: #c0392b;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+
+#game .success-highlight-out {
+    background: #6C7A89;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+
+#game .failure-highlight-out {
+    background: #6C7A89;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+
 
 /* 3.3. Categories */
 
 #categories .content {
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 
@@ -277,15 +305,16 @@ header button.main:before {
 
 /* 4. Animations */
 
-section>div {
-    -webkit-animation: fadein 2s;
-    -moz-animation: fadein 2s;
-    -ms-animation: fadein 2s;
-    -o-animation: fadein 2s;
-    animation: fadein 2s;
+section>div,
+button.main {
+    -webkit-animation: fade-in 2s;
+    -moz-animation: fade-in 2s;
+    -ms-animation: fade-in 2s;
+    -o-animation: fade-in 2s;
+    animation: fade-in 2s;
 }
 
-@keyframes fadein {
+@keyframes fade-in {
     from {
         opacity: 0;
     }
@@ -294,7 +323,7 @@ section>div {
     }
 }
 
-@-moz-keyframes fadein {
+@-moz-keyframes fade-in {
     from {
         opacity: 0;
     }
@@ -303,7 +332,7 @@ section>div {
     }
 }
 
-@-webkit-keyframes fadein {
+@-webkit-keyframes fade-in {
     from {
         opacity: 0;
     }
@@ -312,7 +341,7 @@ section>div {
     }
 }
 
-@-ms-keyframes fadein {
+@-ms-keyframes fade-in {
     from {
         opacity: 0;
     }
@@ -321,45 +350,11 @@ section>div {
     }
 }
 
-@-o-keyframes fadein {
+@-o-keyframes fade-in {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
     }
-}
-
-
-/* 5. Modal */
-
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
 }

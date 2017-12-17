@@ -1,21 +1,15 @@
 class View {
 	constructor(id) {
 		this.id = id;
-		this.section = "section";
-		this.content = ".content";
-		this.time = 0;
 		this.win = false;
-		window.min = 0;
-		window.sec = 0;
 		this.loadTemplate();
 	}
-
 	loadTemplate() {
 		this.ajaxRequest(this);
 		this.toogleReturnBtn();
 	}
 	ajaxRequest(ref) {
-		var xhttp = new XMLHttpRequest();
+		let xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
 				clearInterval(ref.time);
@@ -39,7 +33,7 @@ class View {
 						ref.active = new Summary(ref, this.responseText, ref.win);
 						break;
 					default:
-						document.querySelector(ref.section).innerHTML = "<p>Content not found!</p>";
+						document.querySelector("section").innerHTML = "<p>Content not found!</p>";
 				}
 			}
 		};
@@ -47,7 +41,7 @@ class View {
 		xhttp.send();
 	}
 	timer() {
-		this.time++;
+		window.time++;
 		window.min = Math.floor(window.time / 60);
 		window.sec = window.time - window.min * 60;
 		document.querySelector(".timer").innerHTML = window.min + ' min ' + window.sec + ' sec';
