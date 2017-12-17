@@ -6,25 +6,24 @@ class Game {
 		this.generateAlphabet();
 		this.randomizeWord();
 		this.render(ref, response);
-		this.drawGuessArea();
 		this.buttonEvents();
-		this.pressEnter();
 	}
 	render(ref, response) {
-		document.querySelector(ref.section).innerHTML = response;
-		document.querySelector(".categoryRand").innerHTML = this.word.category;
+		document.querySelector("section").innerHTML = response;
+		document.querySelector(".category-rand").innerHTML = this.word.category;
 		this.triesRefresh();
 		this.renderAlphabet();
+		this.drawGuessArea();
 	}
 	generateAlphabet() {
-		for (var i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
+		for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
 			this.alphabet.push(String.fromCharCode(i).toUpperCase());
 		}
 	}
 	renderAlphabet() {
-		for (var i = 0; i < this.alphabet.length; i++) {
-			document.querySelector(".alphabet").innerHTML += "<button name='" + this.alphabet[i] + "' type='button' class='alphabetLetter'>" + this.alphabet[i] + "</button>";
-		}
+		this.alphabet.forEach(letter => {
+			document.querySelector(".alphabet").innerHTML += "<button name='" + letter + "' type='button' class='alphabetLetter'>" + letter + "</button>";
+		});
 	}
 	triesRefresh() {
 		if (this.tries == 0) {
@@ -39,51 +38,52 @@ class Game {
 	}
 	drawGuessArea() {
 		this.word.title = this.sanitize(this.word.title);
-		for (var i = 0; i < this.word.title.length; i++) {
+		for (let i = 0; i < this.word.title.length; i++) {
 			if (this.word.title[i] == ' ') {
-				document.querySelector(".guessArea").innerHTML += "<br/>";
+				document.querySelector(".guess-area").innerHTML += "<br/>";
 			} else if (this.word.title[i] >= 'A' && this.word.title[i] <= 'Z') {
-				document.querySelector(".guessArea").innerHTML += "<input index='" + i + "' type='text' class='uknownLetter'></input>";
+				document.querySelector(".guess-area").innerHTML += "<input index='" + i + "' type='text' class='guess-letter-input'></input>";
 			}
 		}
 	}
 	sanitize(password) {
-		var nonePunctuation = password.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+		let nonePunctuation = password.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
 		return nonePunctuation.replace(/\s{2,}/g, " ");
 	}
 	validate(ref) {
 		let key = ref.name;
-		var idx = [];
-		if (confirm("You've selected: " + key + ". Confirm?") == true) {
-			for (var i = 0; i < this.word.title.length; i++) {
-				if (this.word.title[i].toUpperCase() === key) idx.push(i);
-			}
-			if (idx.length) {
-				for (var i = 0; i < idx.length; i++) {
-					this.fillGaps(idx[i]);
-				}
-				this.isCorrect(true);
-				this.isFullPassword();
-			} else {
-				this.tries--;
-				if (this.tries > 0) {
-					this.isCorrect(false);
-				}
-				this.triesRefresh();
-			}
-			ref.disabled = true;
+		let index = [];
+		// if (confirm("You've selected: " + key + ". Confirm?") == true) {
+		for (let i = 0; i < this.word.title.length; i++) {
+			if (this.word.title[i].toUpperCase() === key) index.push(i);
 		}
-	}
-	isCorrect(correct) {
-		if (correct) {
-			alert("Success! You've guessed the letter.");
+		if (index.length) {
+			for (let i = 0; i < index.length; i++) {
+				this.fillGaps(index[i]);
+			}
+			this.highlightGuessArea("success");
+			this.isFullPassword();
 		} else {
-			alert("Ups... You've missed. Try again!");
+			this.tries--;
+			if (this.tries > 0) {
+				this.highlightGuessArea("failure");
+			}
+			this.triesRefresh();
 		}
+		ref.disabled = true;
+		// }
+	}
+	async highlightGuessArea(state) {
+		document.querySelector(".guess-area").classList.add(state + "-highlight-in");
+		await this.sleep(250);
+		document.querySelector(".guess-area").classList.add(state + "-highlight-out");
+		await this.sleep(250);
+		document.querySelector(".guess-area").classList.remove(state + "-highlight-in");
+		document.querySelector(".guess-area").classList.remove(state + "-highlight-out");
 	}
 	isFullPassword() {
-		let allLetters = document.querySelectorAll(".uknownLetter").length;
-		let disabled = document.querySelectorAll(".uknownLetter:disabled").length;
+		let allLetters = document.querySelectorAll(".guess-letter-input").length;
+		let disabled = document.querySelectorAll(".guess-letter-input:disabled").length;
 		if (allLetters == disabled) {
 			this.isGameOver(true);
 		}
@@ -91,28 +91,28 @@ class Game {
 	showHint() {
 		document.querySelector(".hint").classList.remove('hide');
 		document.querySelector(".hint").innerHTML = this.word.hint;
-		document.querySelector(".hintBtn").classList.add('hide');
+		document.querySelector(".hint-btn").classList.add('hide');
 	}
 	submitPassword() {
-		let password = document.querySelector(".fullPass").value;
+		let password = document.querySelector(".full-pass-input").value;
 		password = this.sanitize(password);
 		if (password == '') {
 			alert("Provide the password!");
 		} else {
 			if (password.toUpperCase() == this.word.title) {
-				this.fillGaps();
 				this.isGameOver(true);
 			} else {
 				this.isGameOver(false);
 			}
+			this.fillGaps();
 		}
 	}
-	fillGaps(idx = -1) {
-		if (idx >= 0) {
-			document.querySelector("input[index='" + idx + "']").value = this.word.title[idx];
-			document.querySelector("input[index='" + idx + "']").disabled = true;
+	fillGaps(index = -1) {
+		if (index >= 0) {
+			document.querySelector("input[index='" + index + "']").value = this.word.title[index];
+			document.querySelector("input[index='" + index + "']").disabled = true;
 		} else {
-			for (var i = 0; i < this.word.title.length; i++) {
+			for (let i = 0; i < this.word.title.length; i++) {
 				if (document.querySelector("input[index='" + i + "']") != null) {
 					document.querySelector("input[index='" + i + "']").value = this.word.title[i];
 					document.querySelector("input[index='" + i + "']").disabled = true;
@@ -124,10 +124,12 @@ class Game {
 		clearInterval(view.time);
 		view.win = win;
 		if (win) {
+			this.highlightGuessArea("success");
 			await this.sleep(1000);
 			view.refresh('summary');
-
 		} else {
+			this.highlightGuessArea("failure");
+			await this.sleep(1000);
 			view.refresh('summary');
 		}
 	}
@@ -135,23 +137,24 @@ class Game {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 	buttonEvents() {
-		var hintBtn = document.querySelector(".hintBtn");
+		let hintBtn = document.querySelector(".hint-btn");
 		hintBtn.onclick = function () {
 			view.active.showHint();
 		};
-		var submitBtn = document.querySelector(".submit");
+		let submitBtn = document.querySelector(".submit");
 		submitBtn.onclick = function () {
 			view.active.submitPassword();
 		};
-		var alphabetLetterBtn = document.querySelectorAll(".alphabetLetter");
-		for (var i = 0; i < alphabetLetterBtn.length; i++) {
+		let alphabetLetterBtn = document.querySelectorAll(".alphabetLetter");
+		for (let i = 0; i < alphabetLetterBtn.length; i++) {
 			alphabetLetterBtn[i].onclick = function () {
 				view.active.validate(this);
 			};
 		}
+		this.pressEnter();
 	}
 	pressEnter() {
-		document.querySelector(".fullPass").addEventListener("keyup", function (e) {
+		document.querySelector(".full-pass-input").addEventListener("keyup", function (e) {
 			if (e.keyCode === 13) document.querySelector(".submit").click();
 		});
 	}
