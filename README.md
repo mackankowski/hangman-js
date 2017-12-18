@@ -15,7 +15,7 @@ NO libraries, NO frameworks!
 ## features
 
 - [x] Custom template engine in vanilla JS
-- [x] Passwords database in file: [data.js](https://github.com/mackankowski/hangman/blob/master/assets/data.js)
+- [x] Passwords database in file: [data.js](https://github.com/mackankowski/hangman/blob/master/assets/js/data.js)
 - [x] Scoreboard in `localStorage`
 - [x] Responsive layout
 
